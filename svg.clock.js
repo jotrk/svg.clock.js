@@ -96,19 +96,15 @@ SVG.extend(SVG.Clock, {
     return this
   }
   // Update time
-, update: function(duration) {
+, update: function() {
     /* get current time */
     var time = new Date()
-
-    /* ensure duration */
-    if (duration == null)
-      duration = 300
 
     /* set all pointers */
     this
       .setHours(time.getHours(), time.getMinutes())
-      .setMinutes(time.getMinutes(), duration)
-      .setSeconds(time.getSeconds(), duration)
+      .setMinutes(time.getMinutes())
+      .setSeconds(time.getSeconds())
 
     return this
   }
@@ -124,7 +120,8 @@ SVG.extend(SVG.Clock, {
     return this
   }
   // Set minute
-, setMinutes: function(minutes, duration) {
+
+, setMinutes: function(minutes) {
     if (minutes == this.time.minutes)
       return this
 
@@ -138,20 +135,14 @@ SVG.extend(SVG.Clock, {
     /* calculate rotation */
     var deg = this.full.minutes * 360 + 360 / 60 * minutes
 
-    /* animate if duration is given */
-    if (duration)
-      this.minutes
-        .animate(duration, SVG.easing.elastic)
-        .rotate(deg, 50, 50)
-    else
-      this.minutes
-        .rotate(deg, 50, 50)
+    this.minutes
+      .rotate(deg, 50, 50)
 
     return this
   }
 
   // Set second
-, setSeconds: function(seconds, duration) {
+, setSeconds: function(seconds) {
     /* store seconds */
     this.time.seconds = seconds
 
@@ -162,15 +153,8 @@ SVG.extend(SVG.Clock, {
     /* calculate rotation */
     var deg = this.full.seconds * 360 + 360 / 60 * seconds
 
-    /* animate if duration is given */
-    if (duration)
-      this.seconds
-        .animate(duration, SVG.easing.elastic)
-        .rotate(deg, 50, 50)
-
-    else
-      this.seconds
-        .rotate(deg, 50, 50)
+    this.seconds
+      .rotate(deg, 50, 50)
 
     return this
   }
