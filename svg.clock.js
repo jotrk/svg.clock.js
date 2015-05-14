@@ -154,7 +154,6 @@ SVG.extend(SVG.Clock, {
     var deg = this.full.seconds * 360 + 360 / 60 * seconds
 
     this.seconds
-      .animate(1000, '-')
       .rotate(deg, 50, 50)
 
     return this
